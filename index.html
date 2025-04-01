@@ -1,1 +1,30 @@
-This is the index page
+<h2>Random Team Generator</h2>
+<label>Enter player names (comma-separated):</label><br>
+<input type="text" id="playersInput" placeholder="e.g., Alice, Bob, Charlie, Dave, Eve">
+<br><br>
+<button onclick="generateTeams()">Generate Teams</button>
+
+<h3>Teams:</h3>
+<p id="team1"></p>
+<p id="team2"></p>
+
+<script>
+function generateTeams() {
+    let input = document.getElementById("playersInput").value;
+    let players = input.split(",").map(name => name.trim()).filter(name => name);
+
+    if (players.length < 2) {
+        alert("Enter at least 2 players!");
+        return;
+    }
+
+    players.sort(() => Math.random() - 0.5);
+
+    let mid = Math.ceil(players.length / 2);
+    let team1 = players.slice(0, mid);
+    let team2 = players.slice(mid);
+
+    document.getElementById("team1").innerText = "Team 1: " + team1.join(", ");
+    document.getElementById("team2").innerText = "Team 2: " + team2.join(", ");
+}
+</script>
